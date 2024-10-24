@@ -91,7 +91,7 @@ class MedicalAppointmentController(http.Controller):
                     'penyakit_pasien': pemeriksaan.penyakit_pasien,
                     'riw_penyakit': pemeriksaan.riw_penyakit,
                     'appointment_id': pemeriksaan.appointment_id.id,
-                    'no_appointment': pemeriksaan.appointment_id.slot_waktu_bpjs.no_seq,
+                    'no_appointment': pemeriksaan.appointment_id.slot_waktu_bpjs.no_seq_bpjs,
                     'poli': pemeriksaan.poli_id.nama_poli
                 })
 
