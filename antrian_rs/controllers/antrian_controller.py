@@ -17,7 +17,7 @@ class MedicalAppointmentController(http.Controller):
             pemeriksaan_records = request.env['medical.pemeriksaan.perawat.rajal'].sudo().search([
                 ('date', '>=', today_start),
                 ('date', '<=', today_end),
-                ('state', '=', 'draft'),
+                ('state', 'in', ['draft', 'panggil_pasien']),
                 ('jenis_pasien', '=', 'umum'),
             ], limit=1) 
 
@@ -73,9 +73,9 @@ class MedicalAppointmentController(http.Controller):
             pemeriksaan_records = request.env['medical.pemeriksaan.perawat.rajal'].sudo().search([
                 ('date', '>=', today_start),
                 ('date', '<=', today_end),
-                ('state', '=', 'draft'),
+                ('state', 'in', ['draft', 'panggil_pasien']),
                 ('jenis_pasien', '=', 'jaminan'),
-            ], limit=1) 
+            ], limit=1)
 
             pemeriksaan_data = []
             for pemeriksaan in pemeriksaan_records:
