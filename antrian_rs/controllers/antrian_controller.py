@@ -4,10 +4,11 @@ from odoo.http import request, Response
 import json
 
 class MedicalAppointmentController(http.Controller):
-
+    
     @http.route('/api/antrian_umum', type='http', auth='public', methods=['GET'], csrf=False)
     def get_antrian_umum(self, **kwargs):
         try:
+            request.env.cr.dbname = 'db_odoo16'
             now = datetime.now() + timedelta(hours=0)
 
             today_start = fields.Datetime.to_string(datetime.combine(now.date(), datetime.min.time()))
@@ -36,10 +37,11 @@ class MedicalAppointmentController(http.Controller):
                     'riw_penyakit': pemeriksaan.riw_penyakit,
                     'appointment_id': pemeriksaan.appointment_id.id,
                     'no_appointment': pemeriksaan.appointment_id.slot_waktu.no_seq,
-                    'poli': pemeriksaan.poli_id.nama_poli
+                    'poli': pemeriksaan.poli_id.nama_poli,
+                    'state' : pemeriksaan.state
                 })
 
-            return Response(
+            response = Response(
                 json.dumps({
                     'tes_hari_sekarang': str(now),
                     'tes_tanggal_mulai': today_start,
@@ -50,6 +52,10 @@ class MedicalAppointmentController(http.Controller):
                 content_type='application/json',
                 status=200
             )
+            response.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8000'
+            response.headers['Access-Control-Allow-Methods'] = 'GET'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+            return response
 
         except Exception as e:
             return Response(
@@ -92,10 +98,11 @@ class MedicalAppointmentController(http.Controller):
                     'riw_penyakit': pemeriksaan.riw_penyakit,
                     'appointment_id': pemeriksaan.appointment_id.id,
                     'no_appointment': pemeriksaan.appointment_id.slot_waktu_bpjs.no_seq_bpjs,
-                    'poli': pemeriksaan.poli_id.nama_poli
+                    'poli': pemeriksaan.poli_id.nama_poli,
+                    'state' : pemeriksaan.state
                 })
 
-            return Response(
+            response = Response(
                 json.dumps({
                     'tes_hari_sekarang': str(now),
                     'tes_tanggal_mulai': today_start,
@@ -106,6 +113,10 @@ class MedicalAppointmentController(http.Controller):
                 content_type='application/json',
                 status=200
             )
+            response.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8000'
+            response.headers['Access-Control-Allow-Methods'] = 'GET'
+            response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+            return response
 
         except Exception as e:
             return Response(
