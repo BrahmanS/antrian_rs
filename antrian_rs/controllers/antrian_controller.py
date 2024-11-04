@@ -52,7 +52,7 @@ class MedicalAppointmentController(http.Controller):
                 content_type='application/json',
                 status=200
             )
-            response.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8000'
+            response.headers['Access-Control-Allow-Origin'] = 'http://103.31.39.53:8080'
             response.headers['Access-Control-Allow-Methods'] = 'GET'
             response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
             return response
@@ -113,7 +113,7 @@ class MedicalAppointmentController(http.Controller):
                 content_type='application/json',
                 status=200
             )
-            response.headers['Access-Control-Allow-Origin'] = 'http://127.0.0.1:8000'
+            response.headers['Access-Control-Allow-Origin'] = 'http://103.31.39.53:8080'
             response.headers['Access-Control-Allow-Methods'] = 'GET'
             response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
             return response
