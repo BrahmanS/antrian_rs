@@ -8,7 +8,6 @@ class MedicalAppointmentController(http.Controller):
     @http.route('/api/antrian_umum', type='http', auth='public', methods=['GET'], csrf=False)
     def get_antrian_umum(self, **kwargs):
         try:
-            request.env.cr.dbname = 'db_odoo16'
             now = datetime.now() + timedelta(hours=0)
 
             today_start = fields.Datetime.to_string(datetime.combine(now.date(), datetime.min.time()))
